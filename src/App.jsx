@@ -2,6 +2,7 @@ import { Routes, Route, Navigate } from 'react-router-dom'
 import Login from './components/Login'
 import Register from './components/Register'
 import Home from './components/Home'
+import Men from './components/Men'
 import './App.css'
 
 function App() {
@@ -10,7 +11,7 @@ function App() {
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
       <Route path="/home" element={<Home />} />
-      <Route path="/shop" element={<Home />} />
+      <Route path="/men" element={<Men />} />
       <Route path="/" element={<Navigate to="/login" replace />} />
     </Routes>
   )

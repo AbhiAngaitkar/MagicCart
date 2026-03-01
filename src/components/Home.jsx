@@ -193,8 +193,8 @@ function Home() {
       <nav style={navStyle}>
         <Link to="/home" style={logoStyle}>Magic Cart</Link>
         <ul style={navLinksStyle}>
-          <li><Link to="/home" style={navLinkStyle}>Mens</Link></li>
-          <li><Link to="/shop" style={navLinkStyle}>Womens</Link></li>
+          <li><Link to="/men" style={navLinkStyle}>Mens</Link></li>
+          <li><a href="#womens" style={navLinkStyle}>Womens</a></li>
           <li><a href="#promo" style={navLinkStyle}>Brands</a></li>
           <li><a href="#pages" style={navLinkStyle}>Contact</a></li>
           <li><a href="#blog" style={navLinkStyle}>Deals</a></li>
@@ -254,16 +254,18 @@ function Home() {
             <span style={categoryTextStyle}>ACCESSORIES</span>
           </div>
         </div>
-        <div style={categoryBlockStyle}>
-          <img
-            src="https://images.unsplash.com/photo-1594938298603-c8148c4dae35?w=600"
-            alt="Men's"
-            style={categoryImgStyle}
-          />
-          <div style={categoryOverlayStyle}>
-            <span style={categoryTextStyle}>MEN'S</span>
+        <Link to="/men" style={{ textDecoration: 'none', color: 'inherit' }}>
+          <div style={categoryBlockStyle}>
+            <img
+              src="https://images.unsplash.com/photo-1594938298603-c8148c4dae35?w=600"
+              alt="Men's"
+              style={categoryImgStyle}
+            />
+            <div style={categoryOverlayStyle}>
+              <span style={categoryTextStyle}>MEN'S</span>
+            </div>
           </div>
-        </div>
+        </Link>
       </section>
     </div>
   )
