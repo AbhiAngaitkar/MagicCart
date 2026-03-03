@@ -140,14 +140,46 @@ function Login() {
     return () => clearTimeout(t)
   }, [warning])
 
-  const handleLogin = () => {
-    setWarning('')
-    if (!username.trim() || !password.trim()) {
-      setWarning('Please fill in all fields')
+  const handleLogin = async () => {
+  setWarning('')
+  setSuccessMessage('')
+
+  if (!username.trim() || !password.trim()) {
+    setWarning('Please fill in all fields')
+    return
+  }
+
+  try {
+    const response = await fetch('http://localhost:8000/auth/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        username: username,
+        password: password,
+      }),
+    })
+
+    const data = await response.json()
+
+    if (!response.ok) {
+      setWarning(data.error || 'Login failed')
       return
     }
+
+    // If login successful
+    setSuccessMessage('Login successful!')
+
+    // Optional: store token if you return one
+    // localStorage.setItem('token', data.access_token)
+
     navigate('/home')
+
+  } catch (error) {
+    setWarning('Server error. Please try again.')
   }
+}
 
   return createElement(
     'div',

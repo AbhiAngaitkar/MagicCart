@@ -152,18 +152,42 @@ function Register() {
     setWarning('')
     setStep((s) => Math.max(1, s - 1))
   }
+const handleRegister = async () => {
+  setWarning('')
 
-  const handleRegister = () => {
-    setWarning('')
-    if (!formData.dateOfBirth.trim()) {
-      setWarning('Please fill in all fields')
-      return
-    }
-    console.log('Register:', formData)
-    navigate('/login', {
-      state: { message: 'Registration successful!' },
-    })
+  if (!formData.dateOfBirth.trim()) {
+    setWarning('Please fill in all fields')
+    return
   }
+
+  try {
+    const response = await fetch('http://127.0.0.1:8000/auth/register', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        username: formData.username,
+        password: formData.password,
+        email: formData.email,
+        name: formData.name,
+        dateofbirth: formData.dateOfBirth,
+      }),
+    })
+
+    const data = await response.json()
+
+    if (response.ok) {
+      navigate('/login', {
+        state: { message: 'Registration successful!' },
+      })
+    } else {
+      setWarning(data.detail || 'Registration failed')
+    }
+  } catch (error) {
+    setWarning('Server error. Please try again.')
+  }
+}
 
   return (
     <div style={pageStyle}>
